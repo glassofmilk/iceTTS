@@ -1,43 +1,87 @@
 const {createApp} = Vue;
 
 const defaultConfig = {
-    version: 2,
-    channel: "",
-    speechRate: 1.0,
-    speechVolume: 0.5,
-    speechPitch: 1.0,
-    defaultLang: '',
-    multiLangScan: true,
-    readUsername: false,
-    usernameAliases: [],
-    enableReplacements: false,
-    replacements: [
-        {
-            find: "https?:\\/\\/(?:www\\.)?([-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6})\\b(?:[-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)",
-            replace: "$1 url"
-        },
-        {
-            find: "(asshole|fuck|smooth ?brained)",
-            replace: " slur "
-        },
-        {
-            find: "[:\\/;]",
-            replace: " "
-        },
-        {
-            find: "(.)\\1{4,}",
-            replace: "$1$1$1$1$1"
-        },
-        {
-            find: "^(.{150}).*$",
-            replace: "$1 et cetera"
-        }
-    ],
-    useRegex: true,
-    enableBlacklist: false,
-    blacklist: [],
-    enableWhitelist: false,
-    whitelist: [],
+  "version": 2,
+  "channel": "HimboEngineeringCo",
+  "speechRate": 1.3,
+  "speechVolume": 0.7,
+  "speechPitch": 1,
+  "defaultLang": "English",
+  "multiLangScan": false,
+  "readUsername": true,
+  "usernameAliases": [
+    {
+      "username": "aur1andragon",
+      "alias": "aur1"
+    },
+    {
+      "username": "tealdragonreaper",
+      "alias": "teal"
+    },
+    {
+      "username": "Mikel0721",
+      "alias": "Mikel"
+    },
+    {
+      "username": "MurderDeathHug",
+      "alias": "M D H"
+    },
+    {
+      "username": "NookabullGaming",
+      "alias": "Nookabull"
+    },
+    {
+      "username": "PokedogPaints",
+      "alias": "Pokedog"
+    },
+    {
+      "username": "GJt365P4",
+      "alias": "G J T"
+    },
+    {
+      "username": "Karma_Pup",
+      "alias": "Karma"
+    },
+    {
+      "username": "tennis61911",
+      "alias": "tennis"
+    },
+    {
+      "username": "oigentsoueuxu",
+      "alias": "xu"
+    }
+  ],
+  "enableReplacements": true,
+  "replacements": [
+    {
+      "find": "https?:\\/\\/(?:www\\.)?([-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6})\\b(?:[-a-zA-Z0-9()!@:%_\\+.~#?&\\/\\/=]*)",
+      "replace": "$1 url"
+    },
+    {
+      "find": "[:\\/;]",
+      "replace": " "
+    },
+    {
+      "find": "(.)\\1{4,}",
+      "replace": "$1$1$1$1$1"
+    },
+    {
+      "find": "^(.{150}).*$",
+      "replace": "$1 et cetera"
+    },
+    {
+      "find": "(\\b\\w+\\b)(\\s+\\1)+",
+      "replace": "$1"
+    }
+  ],
+  "useRegex": true,
+  "enableBlacklist": true,
+  "blacklist": [
+    "HimboEngineeringCo",
+    "SoundAlerts"
+  ],
+  "enableWhitelist": false,
+  "whitelist": []
 };
 
 const localStorageKey = "iceTtsConfig";
@@ -193,6 +237,7 @@ const app = createApp({
             new bootstrap.Toast(document.getElementById("toast-bad-config")).show();
             this.showConfigToast = false;
         }
+        this.connectIRC();
     },
     watch: {
         config: {
