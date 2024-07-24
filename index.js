@@ -237,7 +237,7 @@ const app = createApp({
             new bootstrap.Toast(document.getElementById("toast-bad-config")).show();
             this.showConfigToast = false;
         }
-        this.connectIRC();
+        this.connectIrc();
     },
     watch: {
         config: {
